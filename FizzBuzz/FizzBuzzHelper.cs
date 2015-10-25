@@ -9,11 +9,21 @@ namespace FizzBuzz
 {
     public class FizzBuzzHelper
     {
-        private SortedList<int, Rule> Rules { get; set; }
+        private SortedList<int, IRule> Rules { get; set; }
+        private static readonly Lazy<FizzBuzzHelper> instance = new Lazy<FizzBuzzHelper>(() => new FizzBuzzHelper());
 
         private FizzBuzzHelper()
         {
-            Rules = new SortedList<int, Rule>();
+            Rules = new SortedList<int, IRule>();
+
+            InitializeRules();
+        }
+
+        private void InitializeRules()
+        {
+            Rules.Add(1, new Rule((i) => (i % 3 == 0) && (i % 5 == 0), "FizzBuzz"));
+            Rules.Add(2, new Rule((i) => (i % 3 == 0), "Fizz"));
+            Rules.Add(3, new Rule((i) => (i % 5 == 0), "Buzz"));
         }
 
         public string Execute(int number)
@@ -29,28 +39,7 @@ namespace FizzBuzz
 
         public static FizzBuzzHelper CreateInstance()
         {
-            var instance = new FizzBuzzHelper();
-
-            instance.Rules.Add(1, new Rule(Rule1, "FizzBuzz"));
-            instance.Rules.Add(2, new Rule(Rule2, "Fizz"));
-            instance.Rules.Add(3, new Rule(Rule3, "Buzz"));
-
-            return instance;
-        }
-
-        private static bool Rule1(int number)
-        {
-            return (number % 3 == 0) && (number % 5 == 0);
-        }
-
-        private static bool Rule2(int number)
-        {
-            return (number % 3 == 0);
-        }
-
-        private static bool Rule3(int number)
-        {
-            return (number % 5 == 0);
+            return instance.Value;
         }
 
     }
