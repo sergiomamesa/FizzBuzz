@@ -9,8 +9,8 @@ namespace FizzBuzz.Rules
 {
     internal class Rule
     {
-        public string Result { get; set; }
-        public Func<int, bool> MethodRule { get; set; }
+        public string Result { get; private set; }
+        public Func<int, bool> MethodRule { get; private set; }
 
         public Rule(Func<int, bool> methodRule, string result)
         {
