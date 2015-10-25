@@ -9,12 +9,12 @@ namespace FizzBuzz
 {
     public class FizzBuzzHelper
     {
-        private SortedList<int, IRule> Rules { get; set; }
+        private SortedList<int, Rule> Rules { get; set; }
         private static readonly Lazy<FizzBuzzHelper> instance = new Lazy<FizzBuzzHelper>(() => new FizzBuzzHelper());
 
         private FizzBuzzHelper()
         {
-            Rules = new SortedList<int, IRule>();
+            Rules = new SortedList<int, Rule>();
 
             InitializeRules();
         }

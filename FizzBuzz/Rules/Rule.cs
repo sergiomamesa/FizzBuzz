@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FizzBuzz.Rules
 {
-    internal class Rule : IRule
+    internal class Rule
     {
         public string Result { get; set; }
         public Func<int, bool> MethodRule { get; set; }
